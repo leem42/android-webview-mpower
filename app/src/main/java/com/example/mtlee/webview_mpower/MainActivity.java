@@ -8,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.view.KeyEvent;
+import android.util.Log;
 
 import com.example.mtlee.webview_mpower.R.id.*;
 
@@ -22,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // ATTENTION: This was auto-generated to handle app links.
-        // Get the url the user clicked to launch the app
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        Uri data = intent.getData();
+         handleIntent(getIntent());
+
 
         myWebView = (WebView) findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
@@ -43,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     private void handleIntent(Intent intent) {
         Uri appLinkData = intent.getData();
         String appLinkAction = intent.getAction();
+        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
+            String url = appLinkData.getLastPathSegment();
+            Log.d("MyApp","Hello");
+        }
     }
 
     // here we can add history navigation to our app
